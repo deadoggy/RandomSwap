@@ -8,7 +8,7 @@ ZERO_THRESHOLD = 1E-8
 
 class RandomSwapClustering:
 
-    def __init__(self, X, k, T, metric=lambda x,y: np.sqrt((x-y).dot(x-y)), km_t=2):
+    def __init__(self, X, k, T, metric=lambda x,y: np.sqrt((x-y).dot(x-y)), km_t=3):
         '''
             Initialization func of RandomSwap
 
@@ -48,7 +48,7 @@ class RandomSwapClustering:
         '''
         j = 0
 
-        for k in range(1, k):
+        for k in range(1, self.k):
             if self.metric(x, self.C[k]) < self.metric(x, self.C[j]):
                 j = k
         
@@ -152,7 +152,7 @@ class RandomSwapClustering:
     def _mean_squared_error(self, C, P):
         sum = 0. 
         for i in range(self.N):
-            sum += sum + self.metric(self.X[i], C[P[i]]) ** 2
+            sum = sum + self.metric(self.X[i], C[P[i]]) ** 2
         
         return sum
         
