@@ -34,6 +34,7 @@ class RandomSwapClustering:
         self.C = np.zeros((k, self.D))
         self.P = np.array([-1] * self.N)
         self.km_t = km_t
+        self.loss = np.inf
 
     def _find_nearest_rep(self, x):
         '''
@@ -149,12 +150,15 @@ class RandomSwapClustering:
             if self.metric(self.X[i],self.C[j]) < self.metric(self.X[i], self.C[self.P[i]]):
                 self.P[i] = j
     
-    def _mean_squared_error(self, C, P):
+    def _mean_squared_error(self, C, P, X=None):
+        if X is None:
+            X = self.X
+
         sum = 0. 
-        for i in range(self.N):
-            sum = sum + self.metric(self.X[i], C[P[i]]) ** 2
+        for i in range(len(X)):
+            sum = sum + self.metric(X[i], C[P[i]]) ** 2
         
-        return sum
+        return sum / len(X)
         
 
     def fit(self):
@@ -162,6 +166,7 @@ class RandomSwapClustering:
         # Initialization 
         self._select_random_rep()
         self._optimal_partition()
+        self.loss = self._mean_squared_error(self.C, self.P)
 
         for t in range(self.T):
 
@@ -171,9 +176,13 @@ class RandomSwapClustering:
             self._local_repartition(j)
             self._kmeans(self.km_t)
 
-            if self._mean_squared_error(self.C, self.P) > self._mean_squared_error(old_C, old_P):
+            loss = self._mean_squared_error(self.C, self.P)
+            if loss > self.loss:
                 self.C = old_C
                 self.P = old_P
+            else:
+                self.loss = loss
+
 
         return self.C, self.P
 
