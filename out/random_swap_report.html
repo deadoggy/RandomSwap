@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Random Swap v.s. KMeans</title>
+        <style>
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        
+        
+    </head>
+    <body class="vscode-light">
+        <h1 id="random-swap-vs-kmeans">Random Swap v.s. KMeans</h1>
+<h2 id="experiment-on-quality">Experiment on quality</h2>
+<ul>
+<li>Dataset: Yelp3k, size = [1000, 600, 600, 800]</li>
+<li>Algorithms: RandomSwap and KMeans</li>
+<li>K: 2 - 14</li>
+<li>Index: NMI, ARI, MSE</li>
+<li>Setup: For each k, run RandomSwap and KMeans for 40 times separately</li>
+</ul>
+<h3 id="box">Box</h3>
+<p><img src="file:////home/yinjia/Documents/RandomSwap/out/box_nmi.png" alt=""></p>
+<p><img src="file:////home/yinjia/Documents/RandomSwap/out/box_ari.png" alt=""></p>
+<p><img src="file:////home/yinjia/Documents/RandomSwap/out/box_mse.png" alt=""></p>
+<h3 id="mean-index">Mean Index</h3>
+<p><img src="file:////home/yinjia/Documents/RandomSwap/out/mean_nmi.png" alt=""></p>
+<p><img src="file:////home/yinjia/Documents/RandomSwap/out/mean_ari.png" alt=""></p>
+<p><img src="file:////home/yinjia/Documents/RandomSwap/out/mean_mse.png" alt=""></p>
+<h2 id="experiment-on-efficiency">Experiment on efficiency</h2>
+<ul>
+<li>Dataset: Yelp3k, size = [1000, 600, 600, 800]</li>
+<li>K: 2 - 14</li>
+<li>Index: second</li>
+<li>Setup: For each k, run RandomSwap and KMeans for 20 times separately and calcuate the mean time of each run</li>
+</ul>
+<p><img src="file:////home/yinjia/Documents/RandomSwap/out/mean_time.png" alt=""></p>
+
+    </body>
+    </html>
